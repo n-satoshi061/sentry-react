@@ -3,6 +3,10 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const methodDoesNotExist =(): void => {
+    throw new Error('Function not implemented.');
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +22,7 @@ function App() {
         >
           Learn React
         </a>
+        <button onClick={() => methodDoesNotExist()}>Break the world</button>;
       </header>
     </div>
   );
