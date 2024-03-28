@@ -1,15 +1,14 @@
 import './App.css';
 import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
 import { ComponentA } from './components/ComponentA';
+import { sentryLog, sentrySetUser } from './utils/sentry';
 
 function App() {
-  const methodDoesNotExist =(): void => {
-    throw new Error('Function not implemented.');
-  }
 
 
-  const logError = (error: Error) => {
+  const logError = (error: Error, info: React.ErrorInfo) => {
     // Do something with the error, e.g. log to an external API
+    sentryLog(error);
 
   };
 
