@@ -11,25 +11,23 @@ const ENVIRONMENT = process.env.ENVIRONMENT;
 let isSentryEnabled = false;
 
 export function setupSentry() {
-  if (SENTRY_DSN) {
-    isSentryEnabled = true;
-    Sentry.init({
-      dsn: SENTRY_DSN,
-      release: RELEASE_TAG,
-      environment: ENVIRONMENT,
-      normalizeDepth: 10,
-      ignoreErrors: [
-        'Request failed with status code 40',
-        'Request failed with status code 50',
-        'Network Error',
-        'AutosizeInput, Select', // react-select
-        'MenuPlacer', // react-select
-        'DraggableCore', // react-draggable
-        'NodeResolver',
-        'Non-Error promise rejection captured with keys',
-      ],
-    });
-  }
+  Sentry.init({
+    dsn: "https://fd18d33c4756ec6339455060a4cb4236@o4506977155940352.ingest.us.sentry.io/4506977268662272",
+    integrations: [
+      Sentry.browserTracingIntegration(),
+      Sentry.replayIntegration({
+        maskAllText: false,
+        blockAllMedia: false,
+      }),
+    ],
+    // Performance Monitoring
+    tracesSampleRate: 1.0, //  Capture 100% of the transactions
+    // Set 'tracePropagationTargets' to control for which URLs distributed tracing should be enabled
+    tracePropagationTargets: ["localhost", /^https:\/\/yourserver\.io\/api/],
+    // Session Replay
+    replaysSessionSampleRate: 0.1, // This sets the sample rate at 10%. You may want to change it to 100% while in development and then sample at a lower rate in production.
+    replaysOnErrorSampleRate: 1.0, // If you're not already sampling the entire session, change the sample rate to 100% when sampling sessions where errors occur.
+  });
 }
 
 export const sentrySetUser = (userId: string, teamId: string) => {
