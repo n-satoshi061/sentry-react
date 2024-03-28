@@ -1,29 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
+import { ComponentA } from './components/ComponentA';
 
 function App() {
   const methodDoesNotExist =(): void => {
     throw new Error('Function not implemented.');
   }
 
+
+  const logError = (error: Error) => {
+    // Do something with the error, e.g. log to an external API
+
+  };
+
+  function ErrorFallback({ error }: any) {
+    const { resetBoundary } = useErrorBoundary();
+  
+    return (
+      <div role="alert">
+        <p>Something went wrong:</p>
+        <pre style={{ color: "red" }}>{error.message}</pre>
+        <button onClick={resetBoundary}>Try again</button>
+      </div>
+    );
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <button onClick={() => methodDoesNotExist()}>Break the world</button>;
-      </header>
+      <ErrorBoundary FallbackComponent={ErrorFallback} onError={logError}>
+        <ComponentA />
+      </ErrorBoundary>
     </div>
   );
 }
