@@ -3,7 +3,12 @@ import React from 'react'
 export const ComponentA: React.FC = () => {
     // 敢えてエラーを起こさせる
     const methodDoesNotExist =(): void => {
-        throw new Error('Function not implemented.');
+        try {
+            throw new Error();
+        } catch (error) {
+            throw new Error('エラーだよ');
+        }
+        
     }
 
   return (
