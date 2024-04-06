@@ -1,6 +1,6 @@
 import * as Sentry from '@sentry/browser';
 import Axios from 'axios';
-import { isAxiosError } from './isAxiosError';
+import { isAxiosError } from '../utils/isAxiosError';
 
 const SENTRY_DSN = process.env.SENTRY_DSN;
 const RELEASE_TAG = process.env.RELEASE_TAG;

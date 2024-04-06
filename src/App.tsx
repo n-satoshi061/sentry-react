@@ -1,7 +1,7 @@
 import './App.css';
 import { ErrorBoundary, useErrorBoundary } from "react-error-boundary";
 import { ComponentA } from './components/ComponentA';
-import { sentryLog, sentrySetUser } from './utils/sentry';
+import { sentryLog, sentrySetUser } from './config/sentry';
 
 function App() {
 

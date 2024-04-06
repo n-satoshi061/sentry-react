@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as Sentry from "@sentry/react";
-import { setupSentry } from './utils/sentry';
+import { setupSentry } from './config/sentry';
 
 setupSentry()
 const root = ReactDOM.createRoot(
