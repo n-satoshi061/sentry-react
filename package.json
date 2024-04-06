@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@sentry/cli": "^2.30.2",
+    "@sentry/cli": "^2.31.0",
     "@sentry/react": "^7.108.0",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
@@ -22,7 +22,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yarn sentry:sourcemaps",
+    "build": "react-scripts build && yarn sentry:sourcemaps && yarn sentry:sourcemaps",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "sentry:sourcemaps": "sentry-cli sourcemaps inject --org 1a9b2a5849c5 --project javascript-react ./out && sentry-cli sourcemaps upload --org 1a9b2a5849c5 --project javascript-react ./out"
